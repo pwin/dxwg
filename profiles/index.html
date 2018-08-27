@@ -22,6 +22,8 @@ id="respecDocument">
 
   <section id="Introduction">
     <h1>Introduction</h1>
+	
+  <section id="Definition">
     <h2>Definition</h2>
     <p>
       A <dfn>profile</dfn> is a named set of constraints on one or more identified base specifications,
@@ -30,7 +32,6 @@ id="respecDocument">
       necessary to accomplish a particular function.
     </p>
 	<p class="note">"Profile" here includes what are often called "application profiles", "metadata application profiles", or "metadata profiles".</p>
-    <p class="todo">
     TODO
     </p>
   </section>
@@ -46,14 +47,68 @@ id="respecDocument">
 			<li>Examples: ODRL, PROV, DCAT, BIBFRAME</li></ul>
 	</div>
     <p>
-      In many cases, there are several ways to describe a resource within the scope of the media type.
-      In the case of XML documents, for instance, the same content can be encoded using one of several
-      DTDs or XML Schemas, whereas in RDF there is a wide choice of RDF vocabularies (classes and properties)
-      available to describe resources of the same type. When a UA initiates a request, e.g., a GET request
-      to retrieve or a PUT request to create or replace a resource, neither the UA nor the server have any
-      possibility to exchange information on how the transmitted resource will be structured precisely.
-      This can be accomplished by implementing content negotiation based on profiles.
+		Builders of vocabularies and ontologies are encouraged to make their 
+		work as broadly applicable as possible so as to maximize future 
+		adoption. As a result, vocabularies and ontologies typically define a 
+		data model using minimal semantics. For example, DCAT defines the 
+		concept of a dataset as an abstract entity with distributions and data 
+		services as means of accessing that data. It is silent on whether a 
+		distribution should be in a particular serialization, or set of 
+		serializations; it is silent on how data services should be configured; 
+		while it states that the value of dcat:theme should be a SKOS concept, 
+		it does not specify a particular SKOS concept scheme, and so on. Other 
+		vocabularies such as Dublin Core are equally parsimonious in their prescriptions of how they should be used.
+	</p><p>
+		This is good practice: it means that data models and methods of working 
+		can applied in different circumstances than those in which the original 
+		definition work was carried out and in that sense promotes broad 
+		interoperability.
+	</p><p>
+		However, any individual system will be designed to meet a specific set 
+		of needs, that is, it will operate in a specific context. It is that 
+		context, and the individual choices made by the engineers working within 
+		it, that will determine how a vocabulary or set of vocabularies will be 
+		used. For example, a system ingesting data may require that a specific 
+		subset of properties from a range of vocabularies is used and that only 
+		terms from a defined code list are used as values for specified 
+		properties. In other words, where the 'base vocabulary' might say "the 
+		value of this property SHOULD be a value from a managed code list", the 
+		profile will say "the value of this property MUST be from *this* 
+		specific code list."
+	</p>
+	<p>
+		The Data Exchange working Group considered a number of Use Cases where profiles form a key part of interoperability agreements within communities of practice. Many of the requirements to provide a means to use DCAT for specific applications have been identified as best dealt with through profiles specifying usage of terms from DCAT and external vocabaularies, without restricting the applicability of those vocabularies in general. Other cases for profiling include XML based data exchange and services. A general mechanism is proposed for clients of HTTP based services to negotiate choice of data content profile.
+	</p>
+	<p>
+		Existing practices have highlighted several key factors that must be taken into consideration:
+		<ol>
+			<li>Profile specification is implemented using different forms of expression, including documents, and formalisms such as SHACL, Schematron etc appropriate for the specifications being profiled.</li>
+			<li>A given profile may have several formalisms for sub-sets of the profile - e.g. Schema and schematron, SHACL and guidance notes etc.</li>
+			<li>No existing vocabulary has been identified that addresses all needs of profile specification for all Web based platforms</li>
+			<li>No existing vocabulary has been identified that captures the inherent relationships of profiles to base specifications or other profiles.</li>
+			<li>Approaches to describing profiles, and guidance on creating profiles, are not standardised</li> 
+		</ol>
+	</p>
+	<p>
+		When examining these Use Cases and requirements it is clear there are three possible scopes for considering profiles: 
+
+		<ol>
+			<li>profiles of DCAT only</li>
+			<li>profiles of RDF vocabularies only</li>
+			<li>general use of profiling to promote interoperability of resources on the Web</li>
+		</ol>
+		
+		Given the motivating Use Cases are not constrained to RDF vocabularies, the appropriate scope is the general case, and a general definition of profiles has been adopted. 
     </p>
+  </section>
+   <section id="Scope">
+       <h2>Scope of Profile Guidance</h2>
+	   <p>
+			This document provides general guidance on the development and publication of profiles to support interoperability of resources on the Web.
+	   </p>
+	   <p>Guidance will be at a conceptual level, but recommendations and examples will use availabile RDF formalisms. This guidance can however be implemented in any platform that provides equivalent mechanisms to meet the requirements described.
+	   </p>
+   </section>
   </section>
   <section id="RelatedWork">
     <h2>Related Work</h2>
